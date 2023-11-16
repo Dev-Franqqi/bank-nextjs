@@ -8,7 +8,7 @@ export default function Home() {
     <>
       <nav className="flex justify-between px-3 pt-2 text-xl">
         <HiBars3 className=" "/>
-        <heade className=" font-bold">ASAP</heade>
+        <header className=" font-bold">ASAP</header>
         <Button className="font-bold text-blue-800" variant={"link"}>
           <Link className="mb-2" href="/login">Log in</Link>
         </Button>
