@@ -10,5 +10,6 @@
 
 .card{
   width : 95%;
+  @apply shadow-lg
 
 }
