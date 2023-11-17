@@ -6,7 +6,7 @@ import { LuFileSignature } from "react-icons/lu";
 import { FaSackDollar } from "react-icons/fa6";
 import { PiPiggyBank } from "react-icons/pi";
 import { MdOutlineHome } from "react-icons/md";
-import { BsCashStack, bsCashStack } from "react-icons/bs";
+import { BsCashStack } from "react-icons/bs";
 import { CiMoneyCheck1 } from "react-icons/ci";
 import Link from "next/link";
 import Image from "next/image";
