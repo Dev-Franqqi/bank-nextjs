@@ -9,7 +9,7 @@
 }
 
 .card{
-  width : 95%;
+  width : 96%;
   @apply shadow-lg
 
 }
@@ -20,6 +20,6 @@
 }
 
 .iconsSection div p{
-  @apply text-black mt-3
+  @apply text-black text-xs mt-3 font-semibold
   
 }
