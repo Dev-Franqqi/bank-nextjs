@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { HiBars3 } from "react-icons/hi2";
+import {motion} from "framer-motion"
 import { IoIosArrowForward } from "react-icons/io";
 import { CiCreditCard1 } from "react-icons/ci";
 import { LuFileSignature } from "react-icons/lu";
@@ -10,8 +10,8 @@ import { BsCashStack } from "react-icons/bs";
 import { CiMoneyCheck1 } from "react-icons/ci";
 import { CiMobile3 } from "react-icons/ci";
 import { GoDeviceDesktop } from "react-icons/go";
-import { FaHeadphones } from "react-icons/fa";
-import { FaPeopleGroup } from "react-icons/fa6";
+import Menubar from "./mycomps/Menubar";
+
 import Link from "next/link";
 import Image from "next/image";
 import firstimage from "./image/pexels-gustavo-fring-3985233.jpg";
@@ -27,49 +27,11 @@ import ninthimage from "./image/photo-child-wearing-yarn-wig-675x450.jpg";
 export default function Home() {
   return (
     <>
-      <nav className="flex justify-between px-3 bg-white pt-2 text-xl">
-        <HiBars3 className="text-3xl" />
-        <header className=" font-bold ml-5 text-center">ASAP</header>
-        <Button className="font-bold text-blue-800" variant={"link"}>
-          <Link className="mb-2" href="/login">
-            Log in
-          </Link>
-        </Button>
-      </nav>
+      <Menubar />
+   
 
-      <aside className="p-6 hidden w-4/5 h-screen bg-white">
-        <ul className="mb-6 text-sm font-bold leading-loose">
-          <li className="mb-4 flex gap-1">
-            <FaHeadphones className="mt-2" />
-            <span>Support</span>
-          </li>
-          <li className="mb-4 flex gap-1">
-            <FaSackDollar className="mt-2" />
-            <span>Financial Education</span>
-          </li>
-          <li className="mb-4 flex gap-1">
-            <FaPeopleGroup className="mt-2" />
-            <span>About us</span>
-          </li>
-        </ul>
-
-        <ul className=" mt-4 font-bold text-lg">
-          <li className="border-b flex justify-between py-4">
-            Personal <IoIosArrowForward className="mt-2" />
-          </li>
-          <li className="border-b flex justify-between py-4">
-            Wealth Management <IoIosArrowForward className="mt-2" />
-          </li>
-          <li className="border-b flex justify-between py-4">
-            Business <IoIosArrowForward className="mt-2" />
-          </li>
-          <li className="border-b flex justify-between py-4">
-            Corporate & Commercial <IoIosArrowForward className="mt-2" />
-          </li>
-        </ul>
-      </aside>
-
-      <aside></aside>
+     
+      
       <main className="bg-white p-4">
         <section className="relative">
           <Image src={firstimage} alt="" />
