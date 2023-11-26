@@ -11,8 +11,15 @@ import {
 } from "@/components/ui/sheet";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
+import {useState} from "react"
 
 export default function Desktopnav() {
+
+  const [email, setEmail] = useState<string>();
+  const [password, setPassword] = useState<string>();
+  const handleSubmit = (e: FormEcent<HTMLFormElement>) => {
+    e.preventDefault();
+  }
   return (
     <>
       <div className="hidden md:block">
@@ -35,8 +42,8 @@ export default function Desktopnav() {
                               </SheetHeader>
                               
                               <form>
-                                  <Input className="mt-8 mb-4" placeholder="Email or Username" type="text" />
-                                  <Input placeholder="password" type="password" />
+                                  <Input onChange={(e)=>(setEmail(e.target.value))} value={email} className="mt-8 mb-4" placeholder="Email or Username" type="text" />
+                                  <Input onChange={(e)=>setPassword(e.target.value)} value={password} placeholder="password" type="password" />
                                   <Button className="bg-blue-600 text-white text-center w-full mt-4" type="submit">Log In</Button>
                               </form>
 
