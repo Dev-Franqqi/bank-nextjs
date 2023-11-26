@@ -17,9 +17,7 @@ export default function Desktopnav() {
 
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-  }
+  
   return (
     <>
       <div className="hidden md:block">
@@ -32,7 +30,7 @@ export default function Desktopnav() {
           <div className="">
             <span className="mr-2">Support</span>
             <Sheet>
-              <SheetTrigger>Open</SheetTrigger>
+              <SheetTrigger className="text-blue-600">Login</SheetTrigger>
               <SheetContent className="bg-white">
                 <SheetHeader>
                   <SheetTitle>Log in</SheetTitle>
@@ -48,7 +46,7 @@ export default function Desktopnav() {
                               </form>
 
                               <p className="text-center mt-4 text-sm">Forgot Your Password? <Link href={'#'} className="text-blue-600">click here</Link> </p>
-                              <p className="text-center text-sm">Dont have an account? <Link className="text-blue-600" href="#">Sign up</Link></p>
+                              <p className="text-center text-sm">Dont have an account? <Link className="text-blue-600" href="/signup">Sign up</Link></p>
               </SheetContent>
             </Sheet>
           </div>

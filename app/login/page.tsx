@@ -9,9 +9,7 @@ export default function Login() {
     const [email, setEmail] = useState<string>();
     const [password, setPassword] = useState<string>();
 
-    const handleSubmit = (e:FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-    }
+   
 
   return (
     <div className="bg-white h-screen md:flex">
@@ -26,7 +24,7 @@ export default function Login() {
         <h2 className="text-xl font-semibold mb-3 mt-7">
           Log in to your account
         </h2>
-        <form className="py- leading-10" onSubmit={handleSubmit}>
+        <form className=" leading-10">
           <label className="text-sm" htmlFor="email">
             Email or Username
           </label>
@@ -55,7 +53,7 @@ export default function Login() {
             Forgot password?
           </Link>
           <Button
-            className="block text-center bg-blue-600 text-white w-full"
+            className="block font-bold text-center bg-blue-600 text-white w-full"
             type="submit"
           >
             Login
@@ -63,7 +61,7 @@ export default function Login() {
         </form>
 
         <p className="text-center mt-4">
-          Dont have an account? <Link href="/signup">Sign up</Link>{" "}
+          Dont have an account? <Link className="text-blue-600" href="/signup">Sign up</Link>{" "}
         </p>
         <footer className="bg-white text-center mt-10">
           <p className="text-gray-300">
