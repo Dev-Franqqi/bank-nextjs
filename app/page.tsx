@@ -11,7 +11,7 @@ import { CiMoneyCheck1 } from "react-icons/ci";
 import { CiMobile3 } from "react-icons/ci";
 import { GoDeviceDesktop } from "react-icons/go";
 import Menubar from "./mycomps/Menubar";
-
+import Desktopnav from "./mycomps/Desktopnav";
 import Link from "next/link";
 import Image from "next/image";
 import firstimage from "./image/pexels-gustavo-fring-3985233.jpg";
@@ -28,15 +28,13 @@ export default function Home() {
   return (
     <>
       <Menubar />
-   
+      <Desktopnav />
 
-     
-      
       <main className="bg-white p-4">
         <section className="relative">
           <Image src={firstimage} alt="" />
 
-          <section className="card bg-white relative -top-6 mx-auto px-3 py-5">
+          <section className="card bg-white relative -top-6 mx-auto px-3 py-5 md:w-2/5 md:px-5 md:absolute md:top-40 md:left-10">
             <h1 className="font-semibold text-neutral-700">PERSONAL BANKING</h1>
             <h2 className="font-bold text-xl">Earn a bonus up to $450</h2>
             <p className="mb-2 text-neutral-700">
@@ -58,7 +56,7 @@ export default function Home() {
             </p>
           </section>
         </section>
-        <section className="card bg-white px-3 py-5 mx-auto mb-6 ">
+        <section className="card bg-white px-3 py-5 mx-auto mb-6 md:hidden">
           <Image src={secondimage} className="mx-auto h-56 w-full" alt="" />
           <h2 className="font-semibold text-neutral-700 mt-4 ">
             SMART REWARDS
@@ -72,7 +70,7 @@ export default function Home() {
           </Link>
         </section>
 
-        <section className="card bg-white px-3 py-5 mx-auto mb-6">
+        <section className="card bg-white px-3 py-5 mx-auto mb-6 md:hidden">
           <Image src={thirdimage} className="mx-auto h-56 w-full" alt="" />
           <h2 className="font-semibold text-neutral-700 mt-4">
             U.S. BANCORP INVESTMENTS
@@ -85,7 +83,7 @@ export default function Home() {
           </Link>
         </section>
 
-        <section className="card bg-white px-3 py-5 mx-auto mb-6">
+        <section className="card bg-white px-3 py-5 mx-auto mb-6 md:hidden">
           <Image src={fourthimage} alt="" className="mx-auto h-56 w-full" />
           <h2 className="font-semibold text-neutral-700 mt-4">
             ALTITUDE GO CARD
@@ -98,7 +96,7 @@ export default function Home() {
           </Link>
         </section>
 
-        <section className="card bg-white px-3 py-5 mx-auto mb-6">
+        <section className="card bg-white px-3 py-5 mx-auto mb-6 md:hidden">
           <Image src={fifthimage} alt="" className="mx-auto h-56 w-full" />
           <h2 className="font-semibold text-neutral-700 mt-4">
             THANK A VETERAN
@@ -111,58 +109,62 @@ export default function Home() {
           </Link>
         </section>
 
-        <section className="iconsSection flex flex-wrap gap-x-1 gap-y-2 bg-white py-3 justify-between mx-auto">
-          <div className="border border-neutral-200 mx-auto rounded-md text-center p-6">
-            <CiCreditCard1 className="mx-auto text-blue-900 text-4xl" />
-            <p>Credit cards</p>
+        <section className="iconsSection flex flex-wrap gap-x-1 gap-y-2 bg-white py-3 justify-between mx-auto ">
+          <div className="border border-neutral-200 mx-auto rounded-md text-center p-6 md:w-1/6">
+            <CiCreditCard1 className="mx-auto text-blue-900 text-4xl md:text-6xl" />
+            <p className="">Credit cards</p>
           </div>
-          <div className="border border-neutral-200 mx-auto rounded-md text-center p-6 ">
-            <CiMoneyCheck1 className="mx-auto text-4xl" />
+          <div className="border border-neutral-200 mx-auto rounded-md text-center p-6 md:w-1/6">
+            <CiMoneyCheck1 className="mx-auto text-4xl md:text-6xl" />
             <p>Checking</p>
           </div>
-          <div className="border border-neutral-200 mx-auto rounded-md text-center p-6">
-            <FaSackDollar className="mx-auto text-3xl" />
+          <div className="border border-neutral-200 mx-auto rounded-md text-center p-6 md:w-1/6">
+            <FaSackDollar className="mx-auto text-3xl d:text-5xl" />
             <p>Savings</p>
           </div>
 
-          <div className="border border-neutral-200 mx-auto rounded-md text-center p-6">
-            <PiPiggyBank className="mx-auto text-3xl" />
+          <div className="border border-neutral-200 mx-auto rounded-md text-center p-6 md:1/6">
+            <PiPiggyBank className="mx-auto text-3xl md:text-5xl" />
             <p>CDs</p>
           </div>
 
           <div className="border border-neutral-200 mx-auto rounded-md text-center p-6">
-            <MdOutlineHome className="mx-auto text-3xl" />
+            <MdOutlineHome className="mx-auto text-3xl md:text-5xl" />
             <p>Mortgage</p>
           </div>
           <div className="border border-neutral-200 mx-auto rounded-md text-center p-6">
-            <BsCashStack className="mx-auto text-3xl" />
+            <BsCashStack className="mx-auto text-3xl md:text-5xl" />
             <p>Investing</p>
           </div>
         </section>
       </main>
 
-      <section className="p-4">
-        <Image src={sixthimage} className="shadow-lg" alt="" />
+      <section className="p-4 md:flex md:px-36 md:gap-7">
+        <Image src={sixthimage} className="shadow-lg md:w-2/4" alt="" />
 
-        <h2 className="text-black mb-2 font-semibold text-3xl mt-2">
-          Banking smarter is easier than ever.
-        </h2>
-        <p className="text-gray-700 mb-2 text-sm">
-          Unlock more benefits and rewards plus earn when you open a checking
-          account
-        </p>
+        <div>
+          <h2 className="text-black mb-2 font-semibold text-3xl mt-2 md:text-4xl">
+            Banking smarter is easier than ever.
+          </h2>
+          <p className="text-gray-700 mb-2 text-sm md:text-lg">
+            Unlock more benefits and rewards plus earn when you open a checking
+            account
+          </p>
 
-        <p className="text-gray-700 text-sm">Apply in minutes with just $25.</p>
-        <Button className="bg-blue-700 text-white mt-4 w-full">
-          Open a checking account
-        </Button>
+          <p className="text-gray-700 text-sm">
+            Apply in minutes with just $25.
+          </p>
+          <Button className="bg-blue-700 text-white mt-4 w-full">
+            Open a checking account
+          </Button>
+        </div>
       </section>
 
       <section className="bg-white p-6 ">
-        <h3 className="text-2xl font-semibold text-blue-950 mb-5">
+        <h3 className="text-2xl font-semibold text-blue-950 mb-5 md:text-4xl">
           Access us wherever you go.
         </h3>
-        <ul className="text-sm">
+        <ul className="text-sm md:text-lg">
           <li className="mb-4">
             <span className="flex gap-x-2 ">
               <CiMobile3 className="text-3xl" /> <span>Online banking</span>
@@ -182,66 +184,79 @@ export default function Home() {
         </ul>
       </section>
 
-      <section className="px-4 py-4 text-sm mb-2 mt-10">
-        <h3 className="text-black text-2xl mb-6 font-bold">
+      <section className="px-4 py-4 text-sm mb-2 mt-10 md:text-lg">
+        <h3 className="text-black text-2xl mb-6 font-bold md:text-4xl">
           Borrowing money is a big deal. We&rsquo;re ready to help.
         </h3>
-        <p className="mb-8 text-sm">
+        <p className="mb-8 text-sm md:text-lg">
           From calculators and rate charts to get you started, to experienced
           loan officers and bankers, Asap bank has answers for all your loan and
           mortgage questions.
         </p>
-        <p className="text-sm font-semibold mb-1">Home mortgage</p>
+        <p className="text-sm font-semibold mb-1 md:text-lg">Home mortgage</p>
         <Link className="text-blue-500 font-medium mb-3" href="/">
           Learn more <IoIosArrowForward className="inline font-semibold" />
         </Link>
 
-        <p className="font-semibold mt-3 text-sm">Home equity line of credit</p>
+        <p className="font-semibold mt-3 text-sm md:text-lg">
+          Home equity line of credit
+        </p>
         <Link className="text-blue-500 font-medium" href="/">
           Learn more <IoIosArrowForward className="inline" />
         </Link>
       </section>
 
-      <section className="p-5 bg-white">
-        <h3 className="text-2xl text-blue-900 font-bold mb-3">Happening now</h3>
-        <Image src={seventhimage} alt="" />
+      <div className="bg-white ">
+        <h3 className="text-2xl p-6 text-blue-900 font-bold mb-3 md:text-4xl">
+          Happening now
+        </h3>
 
-        <p className="text-base mt-2 text-gray-600 mb-1">HOLIDAY SHOPPING</p>
+        <div className="md:flex">
+          <section className="p-5 bg-white">
+            <Image src={seventhimage} alt="" />
 
-        <p className="mb-2 text-xl font-semibold">
-          How to maximie credit card rewards for more bang for your buck
-        </p>
-        <Link className="text-blue-500 font-medium text-sm" href="/">
-          Get the details <IoIosArrowForward className="inline" />
-        </Link>
-      </section>
-      <section className="p-5 bg-white">
-        <Image src={eighthimage} alt="" />
+            <p className="text-base mt-2 text-gray-600 mb-1 md:text-lg">
+              HOLIDAY SHOPPING
+            </p>
 
-        <p className="text-base mt-2 text-gray-600 mb-1">CREDIT AWARENESS</p>
+            <p className="mb-2 text-xl font-semibold md:text-2xl">
+              How to maximie credit card rewards for more bang for your buck
+            </p>
+            <Link className="text-blue-500 font-medium text-sm md:text-base" href="/">
+              Get the details <IoIosArrowForward className="inline" />
+            </Link>
+          </section>
+          <section className="p-5 bg-white">
+            <Image src={eighthimage} alt="" />
 
-        <p className="mb-2 text-xl font-semibold">
-          Five ways to build credit history and maintain a good score
-        </p>
-        <Link className="text-blue-500 font-medium text-sm" href="/">
-          Follow these tips <IoIosArrowForward className="inline" />
-        </Link>
-      </section>
-      <section className="p-5 bg-white">
-        <Image src={ninthimage} alt="" />
+            <p className="text-base mt-2 text-gray-600 mb-1 md:text-lg">
+              CREDIT AWARENESS
+            </p>
 
-        <p className="text-base mt-2 text-gray-600 mb-1">GIVING BACK</p>
+            <p className="mb-2 text-xl font-semibold md:text-2xl">
+              Five ways to build credit history and maintain a good score
+            </p>
+            <Link className="text-blue-500 font-medium text-sm md:text-base" href="/">
+              Follow these tips <IoIosArrowForward className="inline" />
+            </Link>
+          </section>
+          <section className="p-5 bg-white">
+            <Image src={ninthimage} alt="" />
 
-        <p className="mb-2 text-xl font-semibold">
-          Volunteers make magic for kids battling cancer
-        </p>
-        <Link className="text-blue-500 font-medium text-sm" href="/">
-          Read more <IoIosArrowForward className="inline" />
-        </Link>
-      </section>
+            <p className="text-base mt-2 text-gray-600 mb-1 md:text-lg">GIVING BACK</p>
 
-      <footer className="bg-blue-800 p-6  text-white">
-        <div className="flex gap-x-6 mb-4 leading-10">
+            <p className="mb-2 text-xl font-semibold md:text-2xl">
+              Volunteers make magic for kids battling cancer
+            </p>
+            <Link className="text-blue-500 font-medium text-sm md:text-base" href="/">
+              Read more <IoIosArrowForward className="inline" />
+            </Link>
+          </section>
+        </div>
+      </div>
+
+      <footer className="bg-blue-800 p-6  text-white md:p-10">
+        <div className="flex gap-x-6 mb-4 leading-10 md:gap-48">
           <ul>
             <li>Support</li>
             <li>Financial education</li>

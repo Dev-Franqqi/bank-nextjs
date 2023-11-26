@@ -16,10 +16,11 @@
 
 .iconsSection div{
   width:47%;
-  @apply text-blue-950
+  
+  @apply text-blue-950 md:w-1/6
 }
 
 .iconsSection div p{
-  @apply text-black text-xs mt-3 font-semibold
+  @apply text-black text-xs mt-3 font-semibold md:text-lg
   
 }
