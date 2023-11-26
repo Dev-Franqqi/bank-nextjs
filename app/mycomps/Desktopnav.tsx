@@ -17,7 +17,7 @@ export default function Desktopnav() {
 
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
-  const handleSubmit = (e: FormEcent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   }
   return (
