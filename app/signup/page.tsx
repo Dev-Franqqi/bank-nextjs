@@ -5,14 +5,67 @@ import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import Boardimage from "../image/pexels-christina-morillo-1181396.jpg"
+import Cookies from "js-cookie";
+import { FormEvent } from "react"
+import supabase from "@/app/supabase"
+import { useRouter } from "next/navigation";
+
 export default function Signup() {
+    const router = useRouter()
     const [firstname, setFirstname] = useState<string>();
     const [lastname, setLastname] = useState<string>();
     const [email, setEmail] = useState<string>();
     const [password, setPassword] = useState<string>();
     const [confirm,setConfirm] = useState<string>()
     const [country, setCountry] = useState<string>()
-    const [phone, setPhone] = useState<number>();
+  const [phone, setPhone] = useState<number>();
+  const [error,setError] = useState<string|null>(null)
+  
+const comparePassword = (a, b) => {
+  if (!(a === b)) {
+    setError("Passwords do not match");
+    throw new Error("Passwords do not match");
+  }
+};
+
+  const handleSubmit = async (e:FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    comparePassword(password,confirm)
+
+
+ 
+const { data, error } = await supabase.auth.signUp({
+  email: email,
+  password: password,
+});
+
+if (error) {
+  setError(error.message);
+} else {
+  console.log(JSON.stringify(data)); // <-- Move this line below the declaration
+  Cookies.set("User", JSON.stringify(data), { expires: 7 });
+
+  const { data: insertData, error: insertError } = await supabase
+    .from("userdata")
+    .insert([
+      {
+        firstname: firstname,
+        lastname: lastname,
+        email: email,
+        password: password,
+        country: country,
+        phone: phone,
+      },
+    ]);
+
+  if (insertError) {
+    setError(insertError.message);
+  } else {
+    router.push("/dashboard");
+  }
+}
+
+  }
     return (
       <div className="bg-white h-screen md:flex">
         <Image
@@ -34,7 +87,8 @@ export default function Signup() {
             </Link>
           </p>
 
-          <form className="leading-10 md:leading-8">
+          <form onSubmit={handleSubmit} className="leading-10 md:leading-8">
+            {error && <div className="text-red-600">{error}</div>}
             <section className="md:flex md:gap-3">
               <div>
                 <label className="text-sm" htmlFor="firstname">
@@ -99,12 +153,14 @@ export default function Signup() {
             <label className="text-sm" htmlFor="countrty">
               Country
             </label>
-            <Input type="text" placeholder="Enter country" required />
+            <Input type="text"
+            value={country} onChange={(e)=>{setCountry(e.target.value)}}  placeholder="Enter country" required />
 
             <label className="text-sm" htmlFor="phone">
               Phone
             </label>
-            <Input placeholder="Enter phone number" type="number" required />
+            <Input
+            value={phone} onChange={(e)=>{setPhone(e.target.value)}}  placeholder="Enter phone number" type="number" required />
 
             <Button
               className="block font-bold text-center mt-4 bg-blue-600 text-white w-full"
