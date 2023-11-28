@@ -18,7 +18,7 @@ export default function Signup() {
     const [password, setPassword] = useState<string>();
     const [confirm,setConfirm] = useState<string>()
     const [country, setCountry] = useState<string>()
-  const [phone, setPhone] = useState<number>();
+  const [phone, setPhone] = useState<string>();
   const [error,setError] = useState<string|null>(null)
   
 const comparePassword = (a, b) => {
@@ -28,42 +28,30 @@ const comparePassword = (a, b) => {
   }
 };
 
-  const handleSubmit = async (e:FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    comparePassword(password,confirm)
+    if (!(firstname || lastname || email || password || confirm || country || phone)) {
+      setError("Please fill in all fields")
+      
+    }
+    
+    comparePassword(password, confirm)
 
 
  
-const { data, error } = await supabase.auth.signUp({
-  email: email,
-  password: password,
-});
+    const { data, error } = await supabase.auth.signUp({
+      email: email,
+      password: password,
+    });
 
-if (error) {
-  setError(error.message);
-} else {
-  console.log(JSON.stringify(data)); // <-- Move this line below the declaration
-  Cookies.set("User", JSON.stringify(data), { expires: 7 });
-
-  const { data: insertData, error: insertError } = await supabase
-    .from("userdata")
-    .insert([
-      {
-        firstname: firstname,
-        lastname: lastname,
-        email: email,
-        password: password,
-        country: country,
-        phone: phone,
-      },
-    ]);
-
-  if (insertError) {
-    setError(insertError.message);
-  } else {
-    router.push("/dashboard");
-  }
-}
+    if (error) {
+      setError(error.message);
+    } else {
+      console.log(JSON.stringify(data)); // <-- Move this line below the declaration
+      Cookies.set("User", JSON.stringify(data), { expires: 7 });
+    }
+    
+   
 
   }
     return (
@@ -124,6 +112,7 @@ if (error) {
               value={email}
               type="email"
               placeholder="Enter Email"
+              required
             />
             <section className="md:flex md:gap-3">
               <div>
@@ -135,6 +124,7 @@ if (error) {
                   value={password}
                   type="password"
                   placeholder="Enter password"
+                  required
                 />
               </div>
               <div>
@@ -146,6 +136,7 @@ if (error) {
                   value={confirm}
                   type="text"
                   placeholder="Confirm password"
+                  required
                 />
               </div>
             </section>
@@ -160,7 +151,7 @@ if (error) {
               Phone
             </label>
             <Input
-            value={phone} onChange={(e)=>{setPhone(e.target.value)}}  placeholder="Enter phone number" type="number" required />
+            value={phone} onChange={(e)=>{setPhone(e.target.value)}}  placeholder="Enter phone number" type="text" required />
 
             <Button
               className="block font-bold text-center mt-4 bg-blue-600 text-white w-full"

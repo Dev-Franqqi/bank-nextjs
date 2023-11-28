@@ -2,14 +2,39 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import {useRouter} from "next/navigation"
 import Link from "next/link";
 import { FormEvent, useState } from "react";
+import Cookies from "js-cookie"
 import Ladywithcomputer from "../image/pexels-christina-morillo-1181292.jpg"
+import supabase from "../supabase"
 export default function Login() {
+
+  const router = useRouter()
     const [email, setEmail] = useState<string>();
     const [password, setPassword] = useState<string>();
+    const [error,setError] = useState<string>()
+    const [isLoading,setIsLoading] = useState<boolean>(false)
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsLoading(true)
+    
+const { data, error } = await supabase.auth.signInWithPassword({
+  email: email,
+  password: password,
+});
+    
+    if (error) {
+      setError(error.message)
+      return
+    }
+      Cookie.set("user",JSON.Stringify(data),{expires:7})
+    router.push('/dashboard')
 
-   
+    setIsLoading(false)
+
+  }
+  
 
   return (
     <div className="bg-white h-screen md:flex">
@@ -24,7 +49,7 @@ export default function Login() {
         <h2 className="text-xl font-semibold mb-3 mt-7">
           Log in to your account
         </h2>
-        <form className=" leading-10">
+        <form onSubmit={handleSubmit} className=" leading-10">
           <label className="text-sm" htmlFor="email">
             Email or Username
           </label>
@@ -55,6 +80,7 @@ export default function Login() {
           <Button
             className="block font-bold text-center bg-blue-600 text-white w-full"
             type="submit"
+            disabled={isLoading}
           >
             Login
           </Button>
