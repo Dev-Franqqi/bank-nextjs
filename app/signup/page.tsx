@@ -12,16 +12,16 @@ import { useRouter } from "next/navigation";
 
 export default function Signup() {
     const router = useRouter()
-    const [firstname, setFirstname] = useState<string>();
-    const [lastname, setLastname] = useState<string>();
-    const [email, setEmail] = useState<string>();
-    const [password, setPassword] = useState<string>();
-    const [confirm,setConfirm] = useState<string>()
-    const [country, setCountry] = useState<string>()
-  const [phone, setPhone] = useState<string>();
-  const [error,setError] = useState<string|null>(null)
-  const [loading,setLoading] = useState<boolean>(false)
-const comparePassword = (a, b) => {
+    const [firstname, setFirstname] = useState<string>('');
+    const [lastname, setLastname] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+  const [confirm, setConfirm] = useState<string>('');
+  const [country, setCountry] = useState<string>('');
+    const [phone, setPhone] = useState<string>('');
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+const comparePassword = (a:string, b:string) => {
   if (!(a === b)) {
     setError("Passwords do not match");
    throw new Error("passwords do not match")
@@ -32,11 +32,11 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
   e.preventDefault();
 
   if (
-    !(firstname || lastname || email || password || confirm || country || phone)
+    !(firstname === '' || lastname === '' || email === '' || password === '' || confirm === '' || country === '' || phone === '')
   ) {
     setError("Please fill in all fields");
-    setLoading(false); // Don't forget to set loading to false
-    return;
+    setLoading(false); 
+    
   }
 
   comparePassword(password, confirm);
@@ -74,7 +74,7 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
       router.push("/dashboard");
     }
   }
-};
+}
 
     return (
       <div className="bg-white h-screen md:flex">
