@@ -11,8 +11,8 @@ import supabase from "../supabase"
 export default function Login() {
 
   const router = useRouter()
-    const [email, setEmail] = useState<string>();
-    const [password, setPassword] = useState<string>();
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
     const [error,setError] = useState<string>()
     const [isLoading,setIsLoading] = useState<boolean>(false)
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
