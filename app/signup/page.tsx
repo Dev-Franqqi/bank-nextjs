@@ -71,7 +71,8 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
       console.log(insertdata);
       Cookies.set("User", JSON.stringify(data), { expires: 7 });
       setLoading(false);
-      router.push("/dashboard");
+     router.push(`/authuser?email=${email}`)
+
     }
   }
 }

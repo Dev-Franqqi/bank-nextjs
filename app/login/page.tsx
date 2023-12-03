@@ -4,10 +4,11 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import {useRouter} from "next/navigation"
 import Link from "next/link";
-import { FormEvent, useState } from "react";
+import { FormEvent, useState,useEffect } from "react";
 import Cookies from "js-cookie"
 import Ladywithcomputer from "../image/pexels-christina-morillo-1181292.jpg"
 import supabase from "../supabase"
+
 export default function Login() {
 
   const router = useRouter()
@@ -36,6 +37,14 @@ const { data, error } = await supabase.auth.signInWithPassword({
 
   }
   
+
+  useEffect(() => {
+    const userCookie = Cookies.get('user');
+    if (userCookie) {
+      router.push('/dashboard')
+      
+    }
+  },[])
 
   return (
     <div className="bg-white h-screen md:flex">

@@ -1,6 +1,8 @@
 "use client"
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import supabase from "../supabase"
+import Cookies from "js-cookie"
 import {
   Sheet,
   SheetContent,
@@ -11,13 +13,46 @@ import {
 } from "@/components/ui/sheet";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
-import {useState} from "react"
+import { useState,FormEvent } from "react"
+import {useRouter} from "next/navigation"
 
 export default function Desktopnav() {
+  const router = useRouter()
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [error, setError] = useState<string | null>();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const [email, setEmail] = useState<string>();
-  const [password, setPassword] = useState<string>();
-  
+ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+   e.preventDefault();
+   setIsLoading(true);
+
+   // Check if email or password is empty
+   if (email === "" || password === "") {
+     setError("Please fill in all fields");
+     setIsLoading(false);
+     return;
+   }
+
+   // Attempt to sign in with Supabase
+   const { data, error } = await supabase.auth.signInWithPassword({
+     email: email,
+     password: password,
+   });
+
+   // Handle authentication result
+   if (error) {
+     setError(error.message);
+     setIsLoading(false);
+   } else {
+     // If successful, set user data in cookies and navigate to the dashboard
+     Cookies.set("user", JSON.stringify(data), { expires: 7 });
+     router.push("/dashboard");
+   }
+
+   // Reset loading state after handling authentication
+   setIsLoading(false);
+ };
   return (
     <>
       <div className="hidden md:block">
@@ -42,7 +77,7 @@ export default function Desktopnav() {
                               <form>
                                   <Input onChange={(e)=>(setEmail(e.target.value))} value={email} className="mt-8 mb-4" placeholder="Email or Username" type="text" />
                                   <Input onChange={(e)=>setPassword(e.target.value)} value={password} placeholder="password" type="password" />
-                                  <Button className="bg-blue-600 text-white text-center w-full mt-4" type="submit">Log In</Button>
+                                  <Button className="bg-blue-600 text-white text-center w-full mt-4" disabled={isLoading} type="submit">Log In</Button>
                               </form>
 
                               <p className="text-center mt-4 text-sm">Forgot Your Password? <Link href={'#'} className="text-blue-600">click here</Link> </p>
