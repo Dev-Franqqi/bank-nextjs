@@ -28,7 +28,7 @@ const { data, error } = await supabase.auth.signInWithPassword({
       setError(error.message)
       return
     }
-      Cookie.set("user",JSON.Stringify(data),{expires:7})
+    Cookie.set("user",JSON.Stringify(data),{expires:7})
     router.push('/dashboard')
 
     setIsLoading(false)

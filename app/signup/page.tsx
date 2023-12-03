@@ -20,40 +20,62 @@ export default function Signup() {
     const [country, setCountry] = useState<string>()
   const [phone, setPhone] = useState<string>();
   const [error,setError] = useState<string|null>(null)
-  
+  const [loading,setLoading] = useState<boolean>(false)
 const comparePassword = (a, b) => {
   if (!(a === b)) {
     setError("Passwords do not match");
-    throw new Error("Passwords do not match");
+   throw new Error("passwords do not match")
+  }
+};
+const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  setLoading(true);
+  e.preventDefault();
+
+  if (
+    !(firstname || lastname || email || password || confirm || country || phone)
+  ) {
+    setError("Please fill in all fields");
+    setLoading(false); // Don't forget to set loading to false
+    return;
+  }
+
+  comparePassword(password, confirm);
+
+  const { data, error } = await supabase.auth.signUp({
+    email: email,
+    password: password,
+  });
+
+  if (error) {
+    console.error(error);
+    setError(error.message);
+    setLoading(false);
+  } else {
+    const { data: insertdata, error: insertError } = await supabase
+      .from("userdata")
+      .insert({
+        firstname: firstname,
+        lastname: lastname,
+        email: email,
+        password: password,
+        country: country,
+        phone: phone,
+      });
+
+    if (insertError) {
+      console.error(insertError);
+      
+      setError(insertError.details);
+      setLoading(false);
+    } else {
+      console.log(insertdata);
+      Cookies.set("User", JSON.stringify(data), { expires: 7 });
+      setLoading(false);
+      router.push("/dashboard");
+    }
   }
 };
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!(firstname || lastname || email || password || confirm || country || phone)) {
-      setError("Please fill in all fields")
-      
-    }
-    
-    comparePassword(password, confirm)
-
-
- 
-    const { data, error } = await supabase.auth.signUp({
-      email: email,
-      password: password,
-    });
-
-    if (error) {
-      setError(error.message);
-    } else {
-      console.log(JSON.stringify(data)); // <-- Move this line below the declaration
-      Cookies.set("User", JSON.stringify(data), { expires: 7 });
-    }
-    
-   
-
-  }
     return (
       <div className="bg-white h-screen md:flex">
         <Image
@@ -156,6 +178,7 @@ const comparePassword = (a, b) => {
             <Button
               className="block font-bold text-center mt-4 bg-blue-600 text-white w-full"
               type="submit"
+              disabled={loading}
             >
               Signup
             </Button>
