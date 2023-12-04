@@ -13,6 +13,8 @@
     "@radix-ui/react-dialog": "^1.0.5",
     "@radix-ui/react-slot": "^1.0.2",
     "@supabase/supabase-js": "^2.39.0",
+    "@types/canvas-confetti": "^1.6.4",
+    "canvas-confetti": "^1.9.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "framer-motion": "^10.16.5",

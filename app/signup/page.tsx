@@ -18,9 +18,10 @@ export default function Signup() {
     const [password, setPassword] = useState<string>('');
   const [confirm, setConfirm] = useState<string>('');
   const [country, setCountry] = useState<string>('');
-    const [phone, setPhone] = useState<string>('');
+   const [phone, setPhone] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  
 const comparePassword = (a:string, b:string) => {
   if (!(a === b)) {
     setError("Passwords do not match");
@@ -28,14 +29,14 @@ const comparePassword = (a:string, b:string) => {
   }
 };
 const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-  setLoading(true);
+  setIsLoading(true);
   e.preventDefault();
 
   if (
-    !(firstname === '' || lastname === '' || email === '' || password === '' || confirm === '' || country === '' || phone === '')
+    firstname === '' || lastname === '' || email === '' || password === '' || confirm === '' || country === '' || phone === ''
   ) {
     setError("Please fill in all fields");
-    setLoading(false); 
+    setIsLoading(false); 
     
   }
 
@@ -49,7 +50,7 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
   if (error) {
     console.error(error);
     setError(error.message);
-    setLoading(false);
+    setIsLoading(false);
   } else {
     const { data: insertdata, error: insertError } = await supabase
       .from("userdata")
@@ -66,11 +67,11 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
       console.error(insertError);
       
       setError(insertError.details);
-      setLoading(false);
+      setIsLoading(false);
     } else {
       console.log(insertdata);
       Cookies.set("User", JSON.stringify(data), { expires: 7 });
-      setLoading(false);
+      setIsLoading(false);
      router.push(`/authuser?email=${email}`)
 
     }
@@ -138,7 +139,7 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
               required
             />
             <section className="md:flex md:gap-3">
-              <div>
+               <div>
                 <label className="text-sm" htmlFor="password">
                   Password
                 </label>
@@ -179,7 +180,7 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
             <Button
               className="block font-bold text-center mt-4 bg-blue-600 text-white w-full"
               type="submit"
-              disabled={loading}
+              disabled={isLoading}
             >
               Signup
             </Button>

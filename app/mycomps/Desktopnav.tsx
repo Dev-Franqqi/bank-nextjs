@@ -72,7 +72,9 @@ export default function Desktopnav() {
                   <SheetDescription>
                     Get Signed in into your account
                   </SheetDescription>
-                              </SheetHeader>
+                </SheetHeader>
+                
+                {error && <p>{error}</p>}
                               
                               <form>
                                   <Input onChange={(e)=>(setEmail(e.target.value))} value={email} className="mt-8 mb-4" placeholder="Email or Username" type="text" />
