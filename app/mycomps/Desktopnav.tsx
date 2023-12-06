@@ -23,7 +23,7 @@ export default function Desktopnav() {
   const [error, setError] = useState<string | null>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
- const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+ const handleSubmit = async (e: FormEvent<HTMLFormElement>)=>{
    e.preventDefault();
    setIsLoading(true);
 
@@ -46,8 +46,14 @@ export default function Desktopnav() {
      setIsLoading(false);
    } else {
      // If successful, set user data in cookies and navigate to the dashboard
-     Cookies.set("user", JSON.stringify(data), { expires: 7 });
+     const userCookie = Cookies.get("user")
+     if (userCookie) {
+       router.push("/dashboard")
+     } else {
+       Cookies.set("user", JSON.stringify(data), { expires: 7 });
      router.push("/dashboard");
+       
+     }
    }
 
    // Reset loading state after handling authentication
