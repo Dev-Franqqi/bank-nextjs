@@ -3,6 +3,8 @@ import Cardimage from "../image/cardimage.png"
 import { Input } from "@/components/ui/input"
 import { IoIosArrowRoundForward } from "react-icons/io";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
+import useRouuter from "next/navigation"
+import Cookies from "js-cookie";
 import {
   Table,
   TableBody,
@@ -15,7 +17,25 @@ import {
 } from "@/components/ui/table";
 
 import Image from "next/image"
-export default function Dashboard() {
+import RootLayout from "../layout";
+export default function Dashboard() 
+{
+  const router = useRouter()
+
+
+  const handleLogout = () => {
+        
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      setError(error.message)
+    } else {
+      Cookies.remove('user')
+      router.push('/')
+
+      
+    }
+
+    }
     const invoices = [
       {
         invoice: "INV001",
@@ -66,7 +86,7 @@ export default function Dashboard() {
       <main className="px-5 py-3">
         <nav className="flex justify-between mb-5">
           <header className="font-bold text-2xl">ASAP</header>{" "}
-          <Button className="pb-3 font-bold text-base text-blue-700">
+          <Button onClick={handleLogout} className="pb-3 font-bold text-base text-blue-700">
             Log out
           </Button>
         </nav>
