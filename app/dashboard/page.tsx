@@ -1,9 +1,11 @@
+"use client"
 import { Button } from "@/components/ui/button"
 import Cardimage from "../image/cardimage.png"
 import { Input } from "@/components/ui/input"
 import { IoIosArrowRoundForward } from "react-icons/io";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
-import useRouuter from "next/navigation"
+import { useRouter } from "next/navigation"
+import supabase from "../supabase"
 import Cookies from "js-cookie";
 import {
   Table,
@@ -18,12 +20,15 @@ import {
 
 import Image from "next/image"
 import RootLayout from "../layout";
+import {useState} from "react"
 export default function Dashboard() 
 {
+
+  const [error ,setError] = useState<string>('')
   const router = useRouter()
 
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
         
     const { error } = await supabase.auth.signOut();
     if (error) {
