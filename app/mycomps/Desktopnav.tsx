@@ -82,7 +82,7 @@ export default function Desktopnav() {
                 
                 {error && <p>{error}</p>}
                               
-                              <form>
+                              <form onSubmit={handleSubmit}>
                                   <Input onChange={(e)=>(setEmail(e.target.value))} value={email} className="mt-8 mb-4" placeholder="Email or Username" type="text" />
                                   <Input onChange={(e)=>setPassword(e.target.value)} value={password} placeholder="password" type="password" />
                                   <Button className="bg-blue-600 text-white text-center w-full mt-4" disabled={isLoading} type="submit">Log In</Button>

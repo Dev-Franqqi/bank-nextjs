@@ -21,4 +21,8 @@ export default function Authuser() {
             <p className=" text-center text-gray-400">An email has been sent to {email}. <br />Check your mail and click on the link to verify your account.</p>
         </div>
     )
+    
+
+
 }
+

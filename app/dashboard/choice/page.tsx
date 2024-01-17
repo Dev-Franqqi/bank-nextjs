@@ -70,11 +70,11 @@ export default function Choicepage() {
  
     return (
       <main className="px-5 py-5 h-screen">
-        <nav className="flex justify-between mb-5">
+        <nav className="flex">
           <div>
             <GoArrowLeft className="text-3xl" />
           </div>
-          <header className="text-center font-semibold text-xl">
+          <header className="text-lg text-center w-5/6">
             Asap Choice
           </header>
 
