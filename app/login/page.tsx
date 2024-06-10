@@ -21,7 +21,7 @@ export default function Login() {
     setIsLoading(true)
     
 const { data, error } = await supabase.auth.signInWithPassword({
-  email: email,
+    email: email,
   password: password,
 });
     
@@ -44,7 +44,7 @@ const { data, error } = await supabase.auth.signInWithPassword({
       router.push('/dashboard')
       
     }
-  },[])
+  })
 
   return (
     <div className="bg-white h-screen md:flex">

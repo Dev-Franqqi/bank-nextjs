@@ -92,7 +92,7 @@ export default function Home() {
             Savor the season with 4X points on dining
           </h3>
           <Link className="hover:underline text-blue-700 " href="/">
-            Get the card <IoIosArrowForward cwe lassName="inline" />
+            Get the card <IoIosArrowForward className="inline" />
           </Link>
         </section>
 

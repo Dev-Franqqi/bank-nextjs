@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import supabase from "../supabase"
 import Cookies from "js-cookie"
+import { useEffect } from "react";
 import {
   Sheet,
   SheetContent,
@@ -25,6 +26,7 @@ export default function Desktopnav() {
 
  const handleSubmit = async (e: FormEvent<HTMLFormElement>)=>{
    e.preventDefault();
+   setError('')
    setIsLoading(true);
 
    // Check if email or password is empty
@@ -59,6 +61,9 @@ export default function Desktopnav() {
    // Reset loading state after handling authentication
    setIsLoading(false);
  };
+ useEffect(()=>{
+  console.log(isLoading)
+ },[isLoading])
   return (
     <>
       <div className="hidden md:block">
@@ -80,7 +85,7 @@ export default function Desktopnav() {
                   </SheetDescription>
                 </SheetHeader>
                 
-                {error && <p>{error}</p>}
+                {error && <p className="text-red-600 mt-4 border border-red-200 rounded-md p-4">{error}</p>}
                               
                               <form onSubmit={handleSubmit}>
                                   <Input onChange={(e)=>(setEmail(e.target.value))} value={email} className="mt-8 mb-4" placeholder="Email or Username" type="text" />
